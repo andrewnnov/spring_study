@@ -6,18 +6,20 @@ import org.springframework.stereotype.Component;
 @Component                                      //default id it is "tennisCoach"
 public class TennisCoach implements Coach {
 	
+	@Autowired
 	private FortuneService fortuneService;
 	
 	public TennisCoach() {
 		System.out.println(">>Tennis coach: inside default constructor");
 	}
 	
-	//define a setter method
+	/*
 	@Autowired
 	public void doSomeCrazyStuff(FortuneService theFortuneService) {
 		System.out.println(">> Tennis coach: inside default doSomeCrazyStuff() method");
 		fortuneService = theFortuneService;
 	}	
+	*/
 	
 	/*@Autowired
 	public TennisCoach(FortuneService fortuneService) {
