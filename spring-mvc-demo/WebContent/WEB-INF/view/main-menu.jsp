@@ -5,7 +5,7 @@
 <h2>Spring MVC Demo - HomePage</h2>
 
 <hr>
-<a href="showForm">Hello World form</a>
+<a href="hello/showForm">Hello World form</a> 
 
 
 </body>
