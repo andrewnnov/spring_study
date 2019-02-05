@@ -6,6 +6,10 @@
 
 <head>
       <title>List Customers</title>
+      <!-- reference our style sheet -->
+      <link type="text/css"
+            rel="stylesheet"
+            href="${pageContext.request.contextPath}/resources/css/style.css"/>
 </head>
 
 <body>
@@ -16,8 +20,7 @@
            </div>
       </div>
       
-      <div id="container">
-      
+      <div id="container">      
       <div id="content">
       
           <!-- add our html table here -->
