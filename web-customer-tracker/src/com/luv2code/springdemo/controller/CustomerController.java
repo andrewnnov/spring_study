@@ -54,6 +54,8 @@ public class CustomerController {
 		//save the customer using our service
 		customerService.saveCustomer(theCustomer);
 		
+		
+		
 		return "redirect:/customer/list";
 	}
 	
