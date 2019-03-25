@@ -10,9 +10,19 @@
         
     <!-- Define your beans here -->
     
-    <bean id="myCoach"
-          class="com.luv2code.springdemo.TrackCoach">    
+    <!-- define the dependency -->
+    <bean id="myFortune"
+          class="com.luv2code.springdemo.HappyFortuneService" >
+    
     </bean>
+    
+    <bean id="myCoach"
+          class="com.luv2code.springdemo.TrackCoach">           
+          <!--set up constructor injection  --> 
+          <constructor-arg ref="myFortune"/>  
+    </bean>
+    
+    
     
     
     

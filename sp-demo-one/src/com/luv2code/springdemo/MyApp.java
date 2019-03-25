@@ -9,7 +9,7 @@ public class MyApp {
 		
 		//use the object
 		
-		System.out.println(theCoach.getDailyWorkout());
+		//System.out.println(theCoach.getDailyWorkout());
 
 	}
 
