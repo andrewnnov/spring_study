@@ -3,6 +3,7 @@ package com.dbexample.spring_jdbc.dao;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
@@ -28,13 +29,24 @@ public class ArticleDAO implements IArticleDAO {
 
 	@Override
 	public Article getArticleById(int articleId) {
-		// TODO Auto-generated method stub
-		return null;
+		String sql = "SELECT articleId, title, category FROM articles WHERE articleId = ?";
+		RowMapper<Article> rowMapper = new BeanPropertyRowMapper<Article>(Article.class);
+		Article article = jdbcTemplate.queryForObject(sql, rowMapper, articleId);
+		return article;
 	}
 
 	@Override
 	public void addArticle(Article article) {
-		// TODO Auto-generated method stub
+		//add article
+		String sql = "INSERT INTO articles (articleId, title, category) values (?, ?, ?)";
+		jdbcTemplate.update(sql, article.getArticleId(), article.getTitle(), article.getCategory());
+		
+		//fetch article id
+		sql = "SELECT articleId FROM articles WHERE title = ? and category = ?";
+		int articleId = jdbcTemplate.queryForObject(sql, Integer.class, article.getTitle());
+		
+		//set article id
+		article.setArticleId(articleId);
 
 	}
 
@@ -52,8 +64,14 @@ public class ArticleDAO implements IArticleDAO {
 
 	@Override
 	public boolean articleExists(String title, String category) {
-		// TODO Auto-generated method stub
-		return false;
+		String sql = "SELECT count(*) FROM articles WHERE title = ? and category=?";
+		int count = jdbcTemplate.queryForObject(sql, Integer.class, title, category);
+		if(count==0) {
+			return false;
+		} else {
+			return true;
+		}
+		
 	}
 
 }

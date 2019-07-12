@@ -22,13 +22,19 @@ public class ArticleService implements IArticleService {
 
 	@Override
 	public Article getArticleById(int articleId) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		Article obj = articleDAO.getArticleById(articleId);
+		return obj;
+				
 	}
 
 	@Override
-	public boolean addArticle(Article article) {
-		// TODO Auto-generated method stub
+	public synchronized boolean addArticle(Article article) {
+		if(articleDAO.articleExists(article.getCategory(), article.getCategory())) {
+			return false;
+		} else {
+			articleDAO.addArticle(article);
+		}
 		return false;
 	}
 
