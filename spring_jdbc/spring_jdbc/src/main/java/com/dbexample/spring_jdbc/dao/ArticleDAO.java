@@ -29,7 +29,7 @@ public class ArticleDAO implements IArticleDAO {
 
 	@Override
 	public Article getArticleById(int articleId) {
-		String sql = "SELECT articleId, title, category FROM articles WHERE articleId = ?";
+		String sql = "SELECT articleId, title, category FROM articles WHERE articleId=?";
 		RowMapper<Article> rowMapper = new BeanPropertyRowMapper<Article>(Article.class);
 		Article article = jdbcTemplate.queryForObject(sql, rowMapper, articleId);
 		return article;
@@ -42,8 +42,8 @@ public class ArticleDAO implements IArticleDAO {
 		jdbcTemplate.update(sql, article.getArticleId(), article.getTitle(), article.getCategory());
 		
 		//fetch article id
-		sql = "SELECT articleId FROM articles WHERE title = ? and category = ?";
-		int articleId = jdbcTemplate.queryForObject(sql, Integer.class, article.getTitle());
+		sql = "SELECT articleId FROM articles WHERE title=? and category=?";
+		int articleId = jdbcTemplate.queryForObject(sql, Integer.class, article.getTitle(), article.getCategory());
 		
 		//set article id
 		article.setArticleId(articleId);
@@ -51,14 +51,16 @@ public class ArticleDAO implements IArticleDAO {
 	}
 
 	@Override
-	public void updateArticle() {
-		// TODO Auto-generated method stub
+	public void updateArticle(Article article) {
+		String sql = "UPDATE articles SET title=?, category=? where articleId=?";
+		jdbcTemplate.update(sql, article.getTitle(), article.getCategory(), article.getArticleId() );
 
 	}
 
 	@Override
-	public void deleteArticle() {
-		// TODO Auto-generated method stub
+	public void deleteArticle(int articleId) {
+		String sql = "DELETE FROM articles WHERE articleId =?";
+		jdbcTemplate.update(sql, articleId);
 
 	}
 

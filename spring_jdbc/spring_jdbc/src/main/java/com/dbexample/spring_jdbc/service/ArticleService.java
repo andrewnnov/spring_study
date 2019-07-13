@@ -34,19 +34,20 @@ public class ArticleService implements IArticleService {
 			return false;
 		} else {
 			articleDAO.addArticle(article);
+			return true;
 		}
-		return false;
+		
 	}
 
 	@Override
 	public void updateArticle(Article article) {
-		// TODO Auto-generated method stub
+		articleDAO.updateArticle(article);
 		
 	}
 
 	@Override
 	public void deleteArticle(int articleId) {
-		// TODO Auto-generated method stub
+		articleDAO.deleteArticle(articleId);
 		
 	}
 	
